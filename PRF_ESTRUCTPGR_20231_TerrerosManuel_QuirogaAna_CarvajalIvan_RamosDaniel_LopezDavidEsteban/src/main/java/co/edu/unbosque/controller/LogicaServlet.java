@@ -1,4 +1,4 @@
-package co.edu.unbosque.model;
+package co.edu.unbosque.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
