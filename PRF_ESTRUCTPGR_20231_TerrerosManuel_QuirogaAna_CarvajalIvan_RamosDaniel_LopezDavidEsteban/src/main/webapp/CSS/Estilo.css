@@ -30,9 +30,21 @@ header {
 	left: 250px; /* x */
 }
 
+.label11 {
+	position: absolute;
+	top: 25px; /* y */
+	left: 250px; /* x */
+}
+
 .label2 {
 	position: absolute;
 	top: -10px;
+	left: 500px;
+}
+
+.label21 {
+	position: absolute;
+	top: 25px;
 	left: 500px;
 }
 
@@ -41,6 +53,13 @@ header {
 	top: -10px;
 	left: 750px;
 }
+
+.label31 {
+	position: absolute;
+	top: 25px;
+	left: 750px;
+}
+
 
 .botonsalir {
 	position: absolute;
@@ -58,9 +77,63 @@ header {
 	width: 1000px;
 	height: 200px;
 	position: absolute;
-	top: 480px;
+	top: 520px;
 	left: 120px;
 	border-radius: 15px;
+}
+
+.recuadroColores {
+	padding: 10px; /* establece un espacio interno de 20 píxeles alrededor del contenido */
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* define tres columnas de igual tamaño */
+  	grid-template-rows: repeat(2, 1fr); /* define dos filas de igual tamaño */
+  	gap: 20px; /* establece un espacio de 10 píxeles entre las celdas de la cuadrícula */
+	background-color: #ccc;
+	border: 2px solid #000;
+	width: 180px;
+	height: 180px;
+	position: absolute;
+	top: 520px;
+	left: 1200px;
+	border-radius: 15px;
+}
+
+.rojo{
+	
+	border-radius: 30px;
+	background-color: red;
+	
+}
+
+.verde{
+	border-radius: 30px;
+	background-color: green;
+}
+
+.amarillo{
+	border-radius: 30px;
+	background-color: yellow;
+}
+
+.azul{
+	border-radius: 30px;
+	background-color: blue;
+}
+
+.rojo:hover {
+	opacity: 0.5;
+}
+
+.verde:hover {
+	opacity: 0.5;
+}
+
+.amarillo:hover {
+	opacity: 0.5;
+}
+
+.azul:hover {
+	opacity: 0.5;
 }
 
 .carta1 {
@@ -134,8 +207,8 @@ header {
 	display: inline-block;
 	margin: 4px 2px;
 	cursor: pointer;
-	top: 425px;
-	left: 510px;
+	top: 450px;
+	left: 200px;
 }
 
 .retroceder img {
@@ -149,8 +222,8 @@ header {
 	display: inline-block;
 	margin: 4px 2px;
 	cursor: pointer;
-	top: 425px;
-	left: 590px;
+	top: 450px;
+	left: 290px;
 }
 
 .consultar img {
@@ -164,8 +237,8 @@ header {
 	display: inline-block;
 	margin: 4px 2px;
 	cursor: pointer;
-	top: 425px;
-	left: 670px;
+	top: 450px;
+	left: 370px;
 }
 
 .continuar img {
@@ -188,7 +261,7 @@ header {
 	width: 210;
 	height: 210px;
 	top: 175px;
-	left: 540px;
+	left: 1140px;
 	border-radius: 10px;
 }
 
@@ -200,7 +273,7 @@ header {
 .jugador {
 	position: absolute;
 	top: 118px;
-	left: 520px;
+	left: 1160px;
 	font-weight: bold;
 }
 
@@ -209,7 +282,7 @@ header {
 	width: 210px; /*ancho*/
 	height: 270px; /*alto*/
 	top: 155px;
-	left: 850px;
+	left: 650px;
 	border-radius: 20px;
 }
 
@@ -224,8 +297,8 @@ header {
 }
 
 .panelprincipal img {
-	width: 1150px;
-	height: 585px;
+	width: 1415px;
+	height: 620px;
 }
 
 .numcartas {
@@ -233,8 +306,8 @@ header {
 	position: absolute;
 	width: 220px;
 	height: 80px;
-	left: 165px; /* x */
-	top: 210px; /* y */
+	left: 200px; /* x */
+	top: 250px; /* y */
 	color: black;
 	border-radius: 10px;
 	list-style: none;
