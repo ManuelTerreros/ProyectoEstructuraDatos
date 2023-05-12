@@ -7,12 +7,16 @@ public class LogicaCartas {
 	private ArrayList<Carta> montoCarta;
 	private String[] color;
 	
+	
+	
 	public LogicaCartas() {
 		 montoCarta=new ArrayList<>();
 		color= new String[4];
 		generarCartaNumero();
+		
+		
 	}
-
+	
 	public void generarCartaNumero() {
 		color[0]="Amarillo";
 		color[1]="Rojo";

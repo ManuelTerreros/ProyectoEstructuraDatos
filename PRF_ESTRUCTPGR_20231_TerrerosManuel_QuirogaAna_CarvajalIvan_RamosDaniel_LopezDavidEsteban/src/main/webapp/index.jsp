@@ -16,10 +16,10 @@
 </div>
 
 <div class="contenedor">
-  <img class="img-esquina" src="Img/UNOLogo.png" alt="Logo">
+  <img class="img-esquina" src="Img/UNOLogo.png" alt="Logo" >
 </div>
 
-	<form id="formulario" action="Juego.jsp" method="get">
+	<form id="formulario" action="LogicaServlet" method="post" onsubmit=" return validarUsuarios();">
 		<div class="form-content">
 			<h1 class="titulo">UNO TEACHER</h1>
 			<div class="table-container">
@@ -27,21 +27,21 @@
 					<tr>
 						<td class="subtitulos">JUGADOR 1</td>
 						<td><input type="text" name="usuario1" value="" size="40"
-							class="field"></td>
+							class="field" id="labeljug1"></td>
 					</tr>
 					<tr>
 						<td class="subtitulos">JUGADOR 2</td>
 						<td><input type="text" name="usuario2" value="" size="40"
-							class="field"></td>
+							class="field" id="labeljug2"></td>
 					</tr>
 					<tr>
 						<td class="subtitulos">JUGADOR 3</td>
 						<td><input type="text" name="usuario3" value="" size="40"
-							class="field"></td>
+							class="field" id="labeljug3"></td>
 					</tr>
 				</table>
 			</div>
-			<br> <input type="submit" value="JUGAR" class="button">
+			<br> <input type="submit" value="JUGAR" class="button" >
 		</div>
 	</form>
 </body>
