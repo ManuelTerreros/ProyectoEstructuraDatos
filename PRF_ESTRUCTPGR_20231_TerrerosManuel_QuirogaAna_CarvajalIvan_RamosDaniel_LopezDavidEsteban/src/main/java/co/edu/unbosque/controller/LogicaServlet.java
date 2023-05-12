@@ -1,11 +1,17 @@
 package co.edu.unbosque.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import co.edu.unbosque.model.Carta;
+import co.edu.unbosque.model.Jugador;
+import co.edu.unbosque.model.LogicaCartas;
 
 /**
  * Servlet implementation class LogicaServlet
@@ -13,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/LogicaServlet")
 public class LogicaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Jugador jug = new Jugador("", "", "" );
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,8 +41,20 @@ public class LogicaServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String jug1 = request.getParameter("usuario1");
+		
+		//System.out.println(jug1);
+		String jug2 = request.getParameter("usuario2");
+		String jug3 = request.getParameter("usuario3");
+		jug.almacenarJugadores(jug1, jug2, jug3);
+		request.setAttribute("jug1", jug1);
+		request.setAttribute("jug2", jug2);
+		request.setAttribute("jug3", jug3);
+		
+		String html = "/Juego.jsp";
+		RequestDispatcher despechador = getServletContext().getRequestDispatcher(html);
+		despechador.forward(request, response);
 	}
 
 }

@@ -12,9 +12,9 @@
         <img src="Img/UNOLogo.png">
       </label>
       <ul class="label">
-        <li class="label1"><h3>Jugador Uno  </h3></li>
-        <li class="label2"><h3>Jugador dos  </h3></li>
-        <li class="label3"><h3>Jugador tres </h3></li>
+        <li class="label1" ><h3>${jug1}</h3></li>
+        <li class="label2" ><h3>${jug2}</h3></li>
+        <li class="label3" ><h3>${jug3}</h3></li>
       </ul>
       <button class="botonsalir"><a href="index.jsp">Salir</a></button>
   </header>
