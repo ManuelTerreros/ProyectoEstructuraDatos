@@ -19,7 +19,7 @@ import co.edu.unbosque.model.LogicaCartas;
 @WebServlet("/LogicaServlet")
 public class LogicaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Jugador jug = new Jugador("", "", "" );
+	Jugador jug = new Jugador("", "", "");
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,14 +43,18 @@ public class LogicaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String jug1 = request.getParameter("usuario1");
-		
-		//System.out.println(jug1);
 		String jug2 = request.getParameter("usuario2");
-		String jug3 = request.getParameter("usuario3");
-		jug.almacenarJugadores(jug1, jug2, jug3);
+		String apren = request.getParameter("apren");
+		
+		
+		
 		request.setAttribute("jug1", jug1);
 		request.setAttribute("jug2", jug2);
-		request.setAttribute("jug3", jug3);
+		request.setAttribute("apren", apren);
+		jug.almacenarJugadores(jug1, jug2, apren);
+		
+		
+		jug.ordenarJugadores();
 		
 		String html = "/Juego.jsp";
 		RequestDispatcher despechador = getServletContext().getRequestDispatcher(html);
