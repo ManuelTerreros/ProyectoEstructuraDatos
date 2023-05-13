@@ -35,8 +35,8 @@
 							class="field" id="labeljug2"></td>
 					</tr>
 					<tr>
-						<td class="subtitulos">JUGADOR 3</td>
-						<td><input type="text" name="usuario3" value="" size="40"
+						<td class="subtitulos">APRENDIZ</td>
+						<td><input type="text" name="apren" value="" size="40"
 							class="field" id="labeljug3"></td>
 					</tr>
 				</table>

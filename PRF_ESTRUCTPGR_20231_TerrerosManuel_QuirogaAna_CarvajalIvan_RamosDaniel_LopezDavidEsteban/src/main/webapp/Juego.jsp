@@ -15,8 +15,8 @@
 		<li class="label11"><h4>${jug1}</h4></li>
 		<li class="label2"><h3>JUGADOR 2</h3></li>
 		<li class="label21"><h4>${jug2}</h4></li>
-		<li class="label3"><h3>JUGADOR 3</h3></li>
-		<li class="label31"><h4>${jug3}</h4></li>
+		<li class="label3"><h3>APRENDIZ</h3></li>
+		<li class="label31"><h4>${apren}</h4></li>
 	</ul>
 	<button class="botonsalir">
 		<a href="index.jsp">Salir</a>
