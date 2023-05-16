@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.edu.unbosque.model.Carta;
-import co.edu.unbosque.model.Jugador;
+import co.edu.unbosque.model.MuestraJugador;
 import co.edu.unbosque.model.LogicaCartas;
 
 /**
@@ -19,7 +19,7 @@ import co.edu.unbosque.model.LogicaCartas;
 @WebServlet("/LogicaServlet")
 public class LogicaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Jugador jug = new Jugador("", "", "");
+	MuestraJugador jug = new MuestraJugador("", "", "");
        
     /**
      * @see HttpServlet#HttpServlet()
