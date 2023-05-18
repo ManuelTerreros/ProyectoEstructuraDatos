@@ -5,9 +5,9 @@ import java.util.Stack;
 public class Jugador {
 	
 	private String nombre;
-	private Stack<String> pilaCartas;
+	private Stack<Carta> pilaCartas;
 	
-	public Jugador(String nombre, Stack<String> pilaCartas) {
+	public Jugador(String nombre, Stack<Carta> pilaCartas) {
 		this.nombre = nombre;
 		this.pilaCartas = pilaCartas;
 	}
@@ -20,11 +20,11 @@ public class Jugador {
 		this.nombre = nombre;
 	}
 
-	public Stack<String> getPilaCartas() {
+	public Stack<Carta> getPilaCartas() {
 		return pilaCartas;
 	}
 
-	public void setPilaCartas(Stack<String> pilaCartas) {
+	public void setPilaCartas(Stack<Carta> pilaCartas) {
 		this.pilaCartas = pilaCartas;
 	}
 

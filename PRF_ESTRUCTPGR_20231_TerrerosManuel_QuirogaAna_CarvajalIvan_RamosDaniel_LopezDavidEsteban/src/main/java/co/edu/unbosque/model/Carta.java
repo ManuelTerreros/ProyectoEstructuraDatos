@@ -25,4 +25,10 @@ public class Carta {
 		this.color = color;
 	}
 
+	@Override
+	public String toString() {
+		return "Carta [numero=" + numero + ", color=" + color + "]\n";
+	}
+	
+
 }
