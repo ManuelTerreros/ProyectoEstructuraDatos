@@ -1,28 +1,28 @@
 package co.edu.unbosque.model;
 
-import java.util.Stack;
 
-public class ListaCircularJugador {
+
+public class PosicionJugador {
 
 	OrdenJugador inicio;
 	OrdenJugador fin;
-	String jugador;
-	String jugadorAnt;
+	Jugador jugador;
+	Jugador jugadorAnt, jugadorSig;
 	
-	public ListaCircularJugador() {
+	public PosicionJugador() {
 		inicio=fin=null; 
-		jugador="";
-		jugadorAnt="";
+		jugador=null;
+		jugadorAnt=null;
 	}
 	
 	public boolean vacia() {
 		return inicio==null;
 	}
 	
-	public void agregarInicio(String nombre, Stack<String> pilaCartas) {
+	public void agregarInicio(Jugador jug) {
 		OrdenJugador nuevo = new OrdenJugador();
-		Jugador j1 = new Jugador(nombre, pilaCartas);
-		nuevo.setJugador(j1);
+
+		nuevo.setJugador(jug);
 		if(vacia()) {
 			inicio=nuevo;
 			inicio.setSiguiente(inicio);
@@ -48,7 +48,7 @@ public class ListaCircularJugador {
 		do {
 			if(actual.getJugador().getNombre()==v) {
 				encontrado = true;
-				jugador = actual.getJugador().getNombre();
+				jugador = actual.getJugador();
 			}
 			actual = actual.getSiguiente();
 		}while(actual!=fin);	
@@ -60,27 +60,26 @@ public class ListaCircularJugador {
 		}
 	}
 	
-	public void juagdorSiguiente(String v) {
+	public Jugador jugadorSiguiente(String v) {
 		OrdenJugador actual = new OrdenJugador();
 		actual=inicio;
 		boolean encontrado = false;
 		do {
 			if(actual.getJugador().getNombre().equals(v)) {
 				encontrado = true;
-				jugador = actual.getJugador().getNombre();
-				jugadorAnt = actual.getSiguiente().getJugador().getNombre();
+				jugador = actual.getJugador();
+				jugadorSig = actual.getSiguiente().getJugador();
 			}
 			actual = actual.getSiguiente();
 		}while(actual!=inicio);	
+		
 		if(encontrado==true) {
-			System.out.println("El jugador que le sigue a "+v+" es");
-			System.out.println(jugadorAnt);
-		}else {
-			System.out.println("no esta");
+			return jugadorSig;
 		}
+		return null;
 	}
 	
-	public void juagdorAnterior(String v) {
+	public Jugador jugadorAnterior(String v) {
 		OrdenJugador actual = new OrdenJugador();
 		OrdenJugador anterior = new OrdenJugador();
 		actual=inicio;
@@ -89,19 +88,19 @@ public class ListaCircularJugador {
 		do {
 			if(actual.getJugador().getNombre().equals(v)) {
 				encontrado = true;
-				jugador = actual.getJugador().getNombre();
-				jugadorAnt = anterior.getJugador().getNombre();
+				jugador = actual.getJugador();
+				jugadorAnt = anterior.getJugador();
 			}
 			anterior = anterior.getSiguiente();
 			actual = actual.getSiguiente();
 			
 		}while(actual!=inicio);	
+		
 		if(encontrado==true) {
-			System.out.println("El jugador anterior a "+v+" es");
-			System.out.println(jugadorAnt);
-		}else {
-			System.out.println("no esta");
+			return jugadorAnt;
 		}
+		
+		return null;
 	}
 	
 	
@@ -114,6 +113,23 @@ public class ListaCircularJugador {
 				actual = actual.getSiguiente();
 			}while(actual!=inicio);
 		}
+	}
+	
+	public Jugador saltarTurno(String v) {
+		
+		Jugador jug = jugadorSiguiente(v);
+		String n = jug.getNombre();
+		Jugador jugadorOmitido = jugadorSiguiente(n);
+		
+		return jugadorOmitido;
+	}
+	
+	public Jugador saltarTurnoContrario(String v) {
+		Jugador jug = jugadorAnterior(v);
+		String n = jug.getNombre();
+		Jugador jugadorOmitido = jugadorAnterior(n);
+		
+		return jugadorOmitido;
 	}
 	
 
