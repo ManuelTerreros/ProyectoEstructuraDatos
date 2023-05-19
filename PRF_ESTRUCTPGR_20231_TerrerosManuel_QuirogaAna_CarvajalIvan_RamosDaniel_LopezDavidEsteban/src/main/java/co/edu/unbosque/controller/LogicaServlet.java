@@ -51,6 +51,8 @@ public class LogicaServlet extends HttpServlet {
 		log.setJug2(jug2);
 		log.setJug3(apren);
 		
+		log.distribuirCartasYJugadores();
+		
 		request.setAttribute("jug1", jug1);
 		request.setAttribute("jug2", jug2);
 		request.setAttribute("apren", apren);
