@@ -41,7 +41,7 @@ public class PosicionJugador {
 		}
 	}
 	
-	public void buscar(String v) {
+	public Jugador buscar(String v) {
 		OrdenJugador actual = new OrdenJugador();
 		actual=fin;
 		boolean encontrado = false;
@@ -53,11 +53,10 @@ public class PosicionJugador {
 			actual = actual.getSiguiente();
 		}while(actual!=fin);	
 		if(encontrado==true) {
-			System.out.println("esta");
-			System.out.println(jugador);
-		}else {
-			System.out.println("no esta");
-		}
+			return jugador;
+		} 
+
+			return null;
 	}
 	
 	public Jugador jugadorSiguiente(String v) {

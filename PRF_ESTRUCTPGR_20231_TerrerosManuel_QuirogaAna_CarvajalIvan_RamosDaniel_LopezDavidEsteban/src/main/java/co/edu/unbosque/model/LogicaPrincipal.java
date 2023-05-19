@@ -8,7 +8,7 @@ public class LogicaPrincipal {
 
 	private PosicionJugador posJugador;
 	private ArrayList<Carta> creacion;
-	private Stack<Carta> pilaJugador1, pilaJugador2, pilaJugador3, montoRobar;
+	private Stack<Carta> pilaJugador1, pilaJugador2, pilaJugador3, montoRobar, montoDescartar;
 	private String[] color;
 	private String jug1, jug2, jug3;
 	private Jugador jugador1, jugador2, jugador3;
@@ -18,13 +18,13 @@ public class LogicaPrincipal {
 		creacion = new ArrayList<>();
 		color = new String[4];
 		montoRobar = new Stack<Carta>();
+		montoDescartar = new Stack<Carta>();
 		pilaJugador1 = new Stack<Carta>();
 		pilaJugador2 = new Stack<Carta>();
 		pilaJugador3 = new Stack<Carta>();
 		jugador1 = jugador2 = jugador3 = null;
 		jug1 = jug2 = jug3 = "";
 		generarCartaNumero();
-		distribuirCartasYJugadores();
 
 	}
 
@@ -61,7 +61,7 @@ public class LogicaPrincipal {
 			// las cartas con 14 equivalen a toma cuatro.
 
 			for (int l = 13; l < 15; l++) {
-				Carta c1 = new Carta(l, "negro");
+				Carta c1 = new Carta(l, "Negro");
 				creacion.add(c1);
 			}
 		}
@@ -96,23 +96,71 @@ public class LogicaPrincipal {
 
 	}
 
-	public void robarCartas(int numero, Jugador jugador) {
+	public void robarCartas(int numero, String nombre) {
 
 		for (int i = 0; i < numero; i++) {
-			jugador.getPilaCartas().push(montoRobar.pop());
+			posJugador.buscar(nombre).getPilaCartas().push(montoRobar.pop());
 		}
 
 	}
-	
+
 	public String cambioColor() {
-		
+
 		Random r = new Random();
 		String colorAleatorio = color[r.nextInt(4)];
-		
+
 		return colorAleatorio;
 	}
 	
-	// METODOS PARA EL SENTIDO HORARIO DE LOS JUGADORES----------------------------------------------------------------------------
+
+	//Este metodo sirve para poder modificar la pila de cartas de el jugador que este seleccionando cartas
+	public Carta elegirCarta(String nombre, Carta carta) {
+		Jugador jugadorActual = posJugador.buscar(nombre);
+		Stack<Carta> pilaActual = jugadorActual.getPilaCartas();
+		Stack<Carta> pilaAux = new Stack<Carta>();
+		ArrayList<Carta> arrayAux = new ArrayList<Carta>();
+		int tam = pilaActual.size();
+		int pos = 0;
+		boolean encontrado = false;
+		int numero = carta.getNumero();
+		String color = carta.getColor();
+
+		for (int i = 0; i < tam; i++) {
+			arrayAux.add(pilaActual.pop());
+		}
+
+		while (!encontrado) {
+			for (int i = 0; i < arrayAux.size(); i++) {
+				if (arrayAux.get(i).getNumero() == numero && arrayAux.get(i).getColor().equals(color)) {
+					encontrado = true;
+					pos = i;
+				}
+			}
+		}
+		arrayAux.remove(pos);
+
+		int tam2 = arrayAux.size() - 1;
+		for (int i = tam2; i >= 0; i--) {
+			pilaAux.push(arrayAux.get(i));
+		}
+		
+		posJugador.buscar(nombre).setPilaCartas(pilaAux);
+		
+		return carta;
+	}
+	
+	//este metodo agrega cartas a la pila de el centro que es la de descartar, les dejo a eleccion que quieren que retorne la pila o el array para que sepan cual fue
+	//la ultima carta que se agrego y conforme a eso escojer la imagen
+	public Stack<Carta> agregarPilaDescartar(Carta carta) {
+		ArrayList<Carta> arrayUltimaCarta = new ArrayList<Carta>();
+		montoDescartar.push(carta);
+		arrayUltimaCarta.add(carta);
+		return montoDescartar;
+	}
+
+
+	// METODOS PARA EL SENTIDO HORARIO DE LOS
+	// JUGADORES----------------------------------------------------------------------------
 
 	public Jugador consultarHorarioAnterior(String nombre) {
 		Jugador ant = posJugador.jugadorAnterior(nombre);
@@ -128,9 +176,10 @@ public class LogicaPrincipal {
 		Jugador omi = posJugador.saltarTurno(nombre);
 		return omi;
 	}
-	
-	// METODOS PARA EL SENTIDO ANTI-HORARIO DE LOS JUGADORES------------------------------------------------------------------------
-	
+
+	// METODOS PARA EL SENTIDO ANTI-HORARIO DE LOS
+	// JUGADORES------------------------------------------------------------------------
+
 	public Jugador consultarContrarioAnterior(String nombre) {
 		Jugador ant = posJugador.jugadorSiguiente(nombre);
 		return ant;
