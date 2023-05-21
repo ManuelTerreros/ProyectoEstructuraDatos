@@ -8,10 +8,12 @@ public class LogicaPrincipal {
 
 	private PosicionJugador posJugador;
 	private ArrayList<Carta> creacion;
-	private Stack<Carta> pilaJugador1, pilaJugador2, pilaJugador3, montoRobar, montoDescartar;
+	private Stack<Carta> montoRobar, montoDescartar;
 	private String[] color;
 	private String jug1, jug2, jug3;
-	private Jugador jugador1, jugador2, jugador3;
+	private ListaCartasJugador1 lista1;
+	private ListaCartasJugador2 lista2;
+	private ListaCartasJugador3 lista3;
 
 	public LogicaPrincipal() {
 		posJugador = new PosicionJugador();
@@ -19,10 +21,9 @@ public class LogicaPrincipal {
 		color = new String[4];
 		montoRobar = new Stack<Carta>();
 		montoDescartar = new Stack<Carta>();
-		pilaJugador1 = new Stack<Carta>();
-		pilaJugador2 = new Stack<Carta>();
-		pilaJugador3 = new Stack<Carta>();
-		jugador1 = jugador2 = jugador3 = null;
+		lista1 = new ListaCartasJugador1();
+		lista2 = new ListaCartasJugador2();
+		lista3 = new ListaCartasJugador3();
 		jug1 = jug2 = jug3 = "";
 		generarCartaNumero();
 
@@ -81,25 +82,31 @@ public class LogicaPrincipal {
 	public void distribuirCartasYJugadores() {
 
 		for (int i = 0; i < 7; i++) {
-			pilaJugador1.push(montoRobar.pop());
-			pilaJugador2.push(montoRobar.pop());
-			pilaJugador3.push(montoRobar.pop());
+			lista1.agregar(montoRobar.pop());
+			lista2.agregar(montoRobar.pop());
+			lista3.agregar(montoRobar.pop());
 		}
 
-		jugador1 = new Jugador(jug1, pilaJugador1);
-		jugador2 = new Jugador(jug2, pilaJugador2);
-		jugador3 = new Jugador(jug3, pilaJugador3);
-
-		posJugador.agregarInicio(jugador1);
-		posJugador.agregarInicio(jugador2);
-		posJugador.agregarInicio(jugador3);
+		posJugador.agregarInicio(jug1);
+		posJugador.agregarInicio(jug2);
+		posJugador.agregarInicio(jug3);
 
 	}
 
-	public void robarCartas(int numero, String nombre) {
+	public void masDosmasCuatroCartas(int numero, String nombre) {
 
-		for (int i = 0; i < numero; i++) {
-			posJugador.buscar(nombre).getPilaCartas().push(montoRobar.pop());
+		if (jug1.equals(nombre)) {
+			for (int i = 0; i < numero; i++) {
+				lista1.agregar(montoRobar.pop());
+			}
+		} else if (jug2.equals(nombre)) {
+			for (int j = 0; j < numero; j++) {
+				lista2.agregar(montoRobar.pop());
+			}
+		} else if (jug3.equals(nombre)) {
+			for (int k = 0; k < numero; k++) {
+				lista3.agregar(montoRobar.pop());
+			}
 		}
 
 	}
@@ -113,110 +120,86 @@ public class LogicaPrincipal {
 	}
 	
 
-	//Este metodo sirve para poder modificar la pila de cartas de el jugador que este seleccionando cartas
+	// Este metodo sirve para poder modificar la pila de cartas de el jugador que
+	// este seleccionando cartas
 	public Carta elegirCarta(String nombre, Carta carta) {
-		Jugador jugadorActual = posJugador.buscar(nombre);
-		Stack<Carta> pilaActual = jugadorActual.getPilaCartas();
-		Stack<Carta> pilaAux = new Stack<Carta>();
-		ArrayList<Carta> arrayAux = new ArrayList<Carta>();
-		int tam = pilaActual.size();
-		int pos = 0;
+//		int numero = carta.getNumero();
+//		String color = carta.getColor();
 		boolean encontrado = false;
-		int numero = carta.getNumero();
-		String color = carta.getColor();
 
-		for (int i = 0; i < tam; i++) {
-			arrayAux.add(pilaActual.pop());
-		}
-
-		while (!encontrado) {
-			for (int i = 0; i < arrayAux.size(); i++) {
-				if (arrayAux.get(i).getNumero() == numero && arrayAux.get(i).getColor().equals(color)) {
-					encontrado = true;
-					pos = i;
-				}
+		if (jug1.equals(nombre)) {
+			if (lista1.buscarCarta(carta)) {
+				lista1.eliminarCarta(carta);
 			}
 		}
-		arrayAux.remove(pos);
-
-		int tam2 = arrayAux.size() - 1;
-		for (int i = tam2; i >= 0; i--) {
-			pilaAux.push(arrayAux.get(i));
+		if (jug2.equals(nombre)) {
+			if (lista2.buscarCarta(carta)) {
+				lista2.eliminarCarta(carta);
+			}
 		}
-		
-		posJugador.buscar(nombre).setPilaCartas(pilaAux);
-		
+		if (jug3.equals(nombre)) {
+			if (lista3.buscarCarta(carta)) {
+				lista3.eliminarCarta(carta);
+			}
+		}
 		return carta;
 	}
-	
-	//este metodo agrega cartas a la pila de el centro que es la de descartar, les dejo a eleccion que quieren que retorne la pila o el array para que sepan cual fue
-	//la ultima carta que se agrego y conforme a eso escojer la imagen
-	public Stack<Carta> agregarPilaDescartar(Carta carta) {
-		ArrayList<Carta> arrayUltimaCarta = new ArrayList<Carta>();
-		montoDescartar.push(carta);
-		arrayUltimaCarta.add(carta);
-		return montoDescartar;
-	}
 
+	// este metodo agrega cartas a la pila de el centro que es la de descartar, les
+	// dejo a eleccion que quieren que retorne la pila o el array para que sepan
+	// cual fue
+	// la ultima carta que se agrego y conforme a eso escojer la imagen
+	public void agregarPilaDescartar(Carta carta) {	
+		montoDescartar.push(carta);
+	}
+	
+
+	public ArrayList<Carta> mostrarCartasJugador(String nombre) {
+		if (jug1.equals(nombre)) {
+			return lista1.mostrar();
+		} else if (jug2.equals(nombre)) {
+			return lista2.mostrar();
+		} else if (jug3.equals(nombre)) {
+			return lista3.mostrar();
+		}
+
+		return null;
+	}
 
 	// METODOS PARA EL SENTIDO HORARIO DE LOS
 	// JUGADORES----------------------------------------------------------------------------
 
-	public Jugador consultarHorarioAnterior(String nombre) {
-		Jugador ant = posJugador.jugadorAnterior(nombre);
+	public String consultarHorarioAnterior(String nombre) {
+		String ant = posJugador.jugadorAnterior(nombre);
 		return ant;
 	}
 
-	public Jugador consultarHorarioSiguiente(String nombre) {
-		Jugador sig = posJugador.jugadorSiguiente(nombre);
+	public String consultarHorarioSiguiente(String nombre) {
+		String sig = posJugador.jugadorSiguiente(nombre);
 		return sig;
 	}
 
-	public Jugador consultarHorarioSaltaTurno(String nombre) {
-		Jugador omi = posJugador.saltarTurno(nombre);
+	public String consultarHorarioSaltaTurno(String nombre) {
+		String omi = posJugador.saltarTurno(nombre);
 		return omi;
 	}
 
 	// METODOS PARA EL SENTIDO ANTI-HORARIO DE LOS
 	// JUGADORES------------------------------------------------------------------------
 
-	public Jugador consultarContrarioAnterior(String nombre) {
-		Jugador ant = posJugador.jugadorSiguiente(nombre);
+	public String consultarContrarioAnterior(String nombre) {
+		String ant = posJugador.jugadorSiguiente(nombre);
 		return ant;
 	}
 
-	public Jugador consultarContrarioSiguiente(String nombre) {
-		Jugador sig = posJugador.jugadorAnterior(nombre);
+	public String consultarContrarioSiguiente(String nombre) {
+		String sig = posJugador.jugadorAnterior(nombre);
 		return sig;
 	}
 
-	public Jugador consultarContrarioSaltaTurno(String nombre) {
-		Jugador omi = posJugador.saltarTurnoContrario(nombre);
+	public String consultarContrarioSaltaTurno(String nombre) {
+		String omi = posJugador.saltarTurnoContrario(nombre);
 		return omi;
-	}
-
-	public Stack<Carta> getPilaJugador1() {
-		return pilaJugador1;
-	}
-
-	public void setPilaJugador1(Stack<Carta> pilaJugador1) {
-		this.pilaJugador1 = pilaJugador1;
-	}
-
-	public Stack<Carta> getPilaJugador2() {
-		return pilaJugador2;
-	}
-
-	public void setPilaJugador2(Stack<Carta> pilaJugador2) {
-		this.pilaJugador2 = pilaJugador2;
-	}
-
-	public Stack<Carta> getPilaJugador3() {
-		return pilaJugador3;
-	}
-
-	public void setPilaJugador3(Stack<Carta> pilaJugador3) {
-		this.pilaJugador3 = pilaJugador3;
 	}
 
 	public String getJug1() {
@@ -249,30 +232,6 @@ public class LogicaPrincipal {
 
 	public void setMontoRobar(Stack<Carta> montoRobar) {
 		this.montoRobar = montoRobar;
-	}
-
-	public Jugador getJugador1() {
-		return jugador1;
-	}
-
-	public void setJugador1(Jugador jugador1) {
-		this.jugador1 = jugador1;
-	}
-
-	public Jugador getJugador2() {
-		return jugador2;
-	}
-
-	public void setJugador2(Jugador jugador2) {
-		this.jugador2 = jugador2;
-	}
-
-	public Jugador getJugador3() {
-		return jugador3;
-	}
-
-	public void setJugador3(Jugador jugador3) {
-		this.jugador3 = jugador3;
 	}
 
 }

@@ -2,18 +2,18 @@ package co.edu.unbosque.model;
 
 public class OrdenJugador {
 
-	private Jugador jugador;
+	private String nombre;
 	private OrdenJugador siguiente;
 	private OrdenJugador anterior;
 
 	
 
-	public Jugador getJugador() {
-		return jugador;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setJugador(Jugador jugador) {
-		this.jugador = jugador;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public OrdenJugador getSiguiente() {
