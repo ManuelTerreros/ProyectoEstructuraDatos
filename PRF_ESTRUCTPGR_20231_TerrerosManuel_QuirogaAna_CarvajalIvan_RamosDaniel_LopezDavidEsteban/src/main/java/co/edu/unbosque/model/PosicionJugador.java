@@ -6,8 +6,8 @@ public class PosicionJugador {
 
 	OrdenJugador inicio;
 	OrdenJugador fin;
-	Jugador jugador;
-	Jugador jugadorAnt, jugadorSig;
+	String jugador, jugadorAnt, jugadorSig;
+
 	
 	public PosicionJugador() {
 		inicio=fin=null; 
@@ -19,10 +19,10 @@ public class PosicionJugador {
 		return inicio==null;
 	}
 	
-	public void agregarInicio(Jugador jug) {
+	public void agregarInicio(String nombre) {
 		OrdenJugador nuevo = new OrdenJugador();
 
-		nuevo.setJugador(jug);
+		nuevo.setNombre(nombre);
 		if(vacia()) {
 			inicio=nuevo;
 			inicio.setSiguiente(inicio);
@@ -41,14 +41,14 @@ public class PosicionJugador {
 		}
 	}
 	
-	public Jugador buscar(String v) {
+	public String buscar(String nombre) {
 		OrdenJugador actual = new OrdenJugador();
 		actual=fin;
 		boolean encontrado = false;
 		do {
-			if(actual.getJugador().getNombre()==v) {
+			if(actual.getNombre().equals(nombre)) {
 				encontrado = true;
-				jugador = actual.getJugador();
+				jugador = actual.getNombre();
 			}
 			actual = actual.getSiguiente();
 		}while(actual!=fin);	
@@ -59,15 +59,15 @@ public class PosicionJugador {
 			return null;
 	}
 	
-	public Jugador jugadorSiguiente(String v) {
+	public String jugadorSiguiente(String v) {
 		OrdenJugador actual = new OrdenJugador();
 		actual=inicio;
 		boolean encontrado = false;
 		do {
-			if(actual.getJugador().getNombre().equals(v)) {
+			if(actual.getNombre().equals(v)) {
 				encontrado = true;
-				jugador = actual.getJugador();
-				jugadorSig = actual.getSiguiente().getJugador();
+				jugador = actual.getNombre();
+				jugadorSig = actual.getSiguiente().getNombre();
 			}
 			actual = actual.getSiguiente();
 		}while(actual!=inicio);	
@@ -78,17 +78,17 @@ public class PosicionJugador {
 		return null;
 	}
 	
-	public Jugador jugadorAnterior(String v) {
+	public String jugadorAnterior(String nombre) {
 		OrdenJugador actual = new OrdenJugador();
 		OrdenJugador anterior = new OrdenJugador();
 		actual=inicio;
 		anterior = fin;
 		boolean encontrado = false;
 		do {
-			if(actual.getJugador().getNombre().equals(v)) {
+			if(actual.getNombre().equals(nombre)) {
 				encontrado = true;
-				jugador = actual.getJugador();
-				jugadorAnt = anterior.getJugador();
+				jugador = actual.getNombre();
+				jugadorAnt = anterior.getNombre();
 			}
 			anterior = anterior.getSiguiente();
 			actual = actual.getSiguiente();
@@ -108,25 +108,25 @@ public class PosicionJugador {
 		actual=inicio;
 		if(!vacia()) {
 			do {
-				System.out.println(actual.getJugador().toString());
+				System.out.println(actual.getNombre());
 				actual = actual.getSiguiente();
 			}while(actual!=inicio);
 		}
 	}
 	
-	public Jugador saltarTurno(String v) {
+	public String saltarTurno(String nombre) {
 		
-		Jugador jug = jugadorSiguiente(v);
-		String n = jug.getNombre();
-		Jugador jugadorOmitido = jugadorSiguiente(n);
+		String jug = jugadorSiguiente(nombre);
+		String n = jug;
+		String jugadorOmitido = jugadorSiguiente(n);
 		
 		return jugadorOmitido;
 	}
 	
-	public Jugador saltarTurnoContrario(String v) {
-		Jugador jug = jugadorAnterior(v);
-		String n = jug.getNombre();
-		Jugador jugadorOmitido = jugadorAnterior(n);
+	public String saltarTurnoContrario(String nombre) {
+		String jug = jugadorAnterior(nombre);
+		String n = jug;
+		String jugadorOmitido = jugadorAnterior(n);
 		
 		return jugadorOmitido;
 	}
