@@ -11,11 +11,8 @@
 	<label class="logo"> <img src="Img/UNOLogo.png">
 	</label>
 	<ul class="label">
-		<li class="label1"><h3>JUGADOR 1</h3></li>
 		<li class="label11"><h4>${jug1}</h4></li>
-		<li class="label2"><h3>JUGADOR 2</h3></li>
 		<li class="label21"><h4>${jug2}</h4></li>
-		<li class="label3"><h3>APRENDIZ</h3></li>
 		<li class="label31"><h4>${apren}</h4></li>
 	</ul>
 	<button class="botonsalir">
@@ -63,12 +60,6 @@
 			<button class="carta4">4</button>
 			<button class="carta5">5</button>
 		</div>
-	</div>
-	<div class="recuadroColores">
-		<button class="rojo"></button>
-		<button class="verde"></button>
-		<button class="azul"></button>
-		<button class="amarillo"></button>
 	</div>
 </body>
 </html>
