@@ -235,6 +235,11 @@ public void elegirJugador(String juga1, String juga2, String juga3){
 		String omi = posJugador.saltarTurnoContrario(nombre);
 		return omi;
 	}
+	
+	//METODO PARA VER ULTIMA CARTA DE LA PILA DESCARRTAR
+		public Carta mostrarUltimaCartaPilaDescartar() {
+			return montoDescartar.peek();
+		}
 
 	public String getJug1() {
 		return jug1;
