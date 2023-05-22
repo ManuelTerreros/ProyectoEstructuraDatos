@@ -201,6 +201,11 @@ public class LogicaPrincipal {
 		String omi = posJugador.saltarTurnoContrario(nombre);
 		return omi;
 	}
+	
+	//METODO PARA VER ULTIMA CARTA DE LA PILA DESCARRTAR
+		public Carta mostrarUltimaCartaPilaDescartar() {
+			return montoDescartar.peek();
+		}
 
 	public String getJug1() {
 		return jug1;
