@@ -117,6 +117,13 @@ public void elegirJugador(String juga1, String juga2, String juga3){
 		posJugador.agregarInicio(jug1);
 		posJugador.agregarInicio(jug2);
 		posJugador.agregarInicio(jug3);
+		
+		System.out.println(jug1);
+		System.out.println(lista1.mostrar());
+		System.out.println(jug2);
+		System.out.println(lista2.mostrar());
+		System.out.println(jug3);
+		System.out.println(lista3.mostrar());
 
 	}
 
