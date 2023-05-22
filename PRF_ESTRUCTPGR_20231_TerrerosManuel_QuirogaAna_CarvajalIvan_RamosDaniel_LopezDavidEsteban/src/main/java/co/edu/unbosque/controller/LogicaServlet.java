@@ -47,19 +47,14 @@ public class LogicaServlet extends HttpServlet {
 		String jug2 = request.getParameter("usuario2");
 		String apren = request.getParameter("apren");
 		
-		log.setJug1(jug1);
-		log.setJug2(jug2);
-		log.setJug3(apren);
-		
+		log.elegirJugador(jug1, jug2, apren);
 		log.distribuirCartasYJugadores();
+		log.sacarCarta();
 		
-		request.setAttribute("jug1", jug1);
-		request.setAttribute("jug2", jug2);
-		request.setAttribute("apren", apren);
-
+		request.setAttribute("jug1", log.getJug1());
+		request.setAttribute("jug2", log.getJug2());
+		request.setAttribute("apren", log.getJug3());
 		
-		
-	
 		
 		String html = "/Juego.jsp";
 		RequestDispatcher despechador = getServletContext().getRequestDispatcher(html);

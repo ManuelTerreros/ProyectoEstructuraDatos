@@ -1,6 +1,8 @@
 package co.edu.unbosque.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
@@ -27,6 +29,31 @@ public class LogicaPrincipal {
 		jug1 = jug2 = jug3 = "";
 		generarCartaNumero();
 
+	}
+public void elegirJugador(String juga1, String juga2, String juga3){
+		
+		this.jug1 = juga1;
+		this.jug2 = juga2;
+		this.jug3 = juga3;
+		System.out.println(jug1 + jug2 +jug3);
+		
+		List<String> jugadores = new ArrayList<>();
+		jugadores.add(jug1);
+		jugadores.add(jug2);
+		jugadores.add(jug3);
+		
+		Collections.shuffle(jugadores, new Random());
+		jug1 = jugadores.get(0);
+		jug2 = jugadores.get(1);
+		jug3 = jugadores.get(2);
+		
+	}
+	
+	public Carta sacarCarta() {
+		Carta carta = montoRobar.pop(); 
+		System.out.println(carta);
+		return carta;
+		
 	}
 
 	public void generarCartaNumero() {
